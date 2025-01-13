@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block body %}
+
+<style>
+    /* Main content area styling */
+    body {
+        height: 100vh;
+        background-image: url("static/stock2.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .body-content {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    /* Content container styling */
+    .content-container {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 800px;
+        width: 100%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.5);
+        text-align: left;
+        color: white;
+    }
+
+    /* Styling for main title */
+    .about-title {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Styling for subheadings */
+    .subheading {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #ffcc00;
+    }
+
+    /* Styling for paragraphs */
+    p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    /* Styling for "Contact Us" button */
+    .contact-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 2px solid transparent;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: color 0.4s, background-color 0.4s, box-shadow 0.4s;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .contact-button:hover {
+        color: #ffcc00;
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.6);
+        border: 2px solid #ffcc00;
+    }
+</style>
+
+<main class="body-content">
+    <div class="content-container">
+        <h1 class="about-title">About Us</h1>
+        
+        <p>Welcome to [Your Company Name]! We specialize in leveraging advanced technologies to provide data-driven insights and predictive analytics. Our cutting-edge solutions are designed to empower businesses and individuals by delivering accurate forecasts and actionable intelligence.</p>
+        
+        <h2 class="subheading">Our Mission</h2>
+        <p>Our mission is to harness the power of big data and machine learning to transform the way decisions are made. We are committed to innovation, reliability, and exceptional customer service, ensuring our clients stay ahead in an increasingly data-driven world.</p>
+        
+        {% comment %} <h2 class="subheading">What We Offer</h2>
+        <p>At [Your Company Name], we offer a range of services that include:</p>
+        <ul>
+            <li>High-quality predictive models for stock price and financial forecasting</li>
+            <li>Expert consultation from industry-leading data scientists and analysts</li>
+            <li>Advanced technology solutions leveraging machine learning and AI</li>
+            <li>Comprehensive support for integrating data-driven strategies into your business</li>
+        </ul> {% endcomment %}
+        
+        <h2 class="subheading">Stock Price Prediction</h2>
+        <p>Utilizing state-of-the-art predictive models, we offer accurate stock price forecasts to help you make informed investment decisions. Our model analyzes historical data and market trends to predict future stock prices with high precision.</p>
+        
+        <h2 class="subheading">Contact Us</h2>
+        <p>We'd love to hear from you! If you have any questions or need assistance with our services, feel free to reach out to us.</p>
+        
+        <a href="/contact" class="contact-button">Contact Us</a>
+    </div>
+</main>
+
+{% endblock body %}  

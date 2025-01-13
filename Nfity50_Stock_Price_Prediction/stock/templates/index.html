@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Stock Predictor{% endblock title %}
+
+{% block body %}
+
+<style>
+    /* General body styling */
+    body {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        background-image: url("static/stock2.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* Main Content Styling (centered content) */
+    .content-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .content-container .quote {
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        padding: 30px;
+        border-radius: 15px;
+        color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .quote .p1 {
+        font-size: 34px;
+        font-weight: bold;
+        color: #ffcc00;
+        margin-bottom: 15px;
+    }
+
+    .quote .p2 {
+        font-size: 18px;
+        color: #ffffff;
+        margin-bottom: 20px;
+    }
+
+    .quote .p3 {
+        font-size: 22px;
+        font-weight: bold;
+        color: #ffcc00;
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        margin-top: 20px;
+    }
+
+    .button-container a {
+        text-decoration: none;
+    }
+
+    button {
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 10px 25px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 2px solid transparent;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        color: #ffcc00;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: 2px solid #ffcc00;
+        box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+    }
+</style>
+
+<div class="content-container">
+    <div class="quote">
+        <p class="p1">Predict Stock Prices Instantly</p> 
+        <p class="p2">Get accurate predictions to help you make better decisions.</p>
+        <p class="p3">Invest Smarter with AI</p>
+        <div class="button-container">
+            <a href="/prediction">
+                <button>Get Started</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

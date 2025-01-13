@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block body %}
+
+<style>
+    /* Main content area styling */
+    body {
+        height: 100vh;
+        background-image: url("static/stock2.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .body-content {
+        flex-grow: 1; /* Ensures content takes the available space between navbar and footer */
+        display: flex;
+        justify-content: center; /* Align content to the center */
+        align-items: center;
+        padding: 20px;
+    }
+
+    /* Content container styling with scrollable content */
+    .content-container {
+        background-color: rgba(0, 0, 0, 0.5); /* Slightly darker background for contrast */
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 800px; 
+        max-height: 70vh; /* Reduce height to fit within the viewport */
+        overflow-y: auto; /* Enable vertical scrolling if content overflows */
+        width: 100%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.5);
+        text-align: left;
+        color: white;
+    }
+
+    /* Styling for the form title */
+    .signup-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Styling for form labels */
+    label {
+        color: white;
+        font-size: 16px;
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold;
+    }
+
+    /* Styling for form inputs */
+    input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+        border: 2px solid rgba(255, 255, 255, 0.4); /* Light border for better visibility */
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Styling for the error message */
+    .error-msg {
+        color: red;
+        font-size: 16px;
+        background-color: rgba(255, 0, 0, 0.1);
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        display: none;
+    }
+
+    button {
+        color: white;
+        font-weight: bold; 
+        font-size: 18px;
+        padding: 10px 30px;
+        background-color: rgba(255, 255, 255, 0.1); /* Transparent button */
+        border: 2px solid transparent;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: color 0.4s, background-color 0.4s, box-shadow 0.4s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    button:hover {
+        color: #ffcc00;
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.6);
+        border: 2px solid #ffcc00;
+    }
+
+    /* Container for the login button */
+    .button-container {
+        display: flex;
+        justify-content: center; /* Center the button horizontally */
+        align-items: center; /* Center the button vertically within the container */
+        margin-top: 20px;
+    }
+
+    /* Already account section */
+    .already-account {
+        text-align: center;
+        margin-top: 20px;
+        color: white;
+    }
+
+    .already-account a {
+        color: #ffcc00;
+        text-decoration: none;
+    }
+
+    .already-account a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<main class="body-content">
+    <div class="content-container">
+        <h1 class="signup-title">Sign Up</h1>
+        <form action="/signup" method="POST" class="signup-form" onsubmit="return validateForm()">
+            {% csrf_token %}
+            
+            <!-- Label for first name -->
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" placeholder="First Name" value="" required>
+
+            <!-- Label for last name -->
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Last Name" value="" required>
+
+            <!-- Label for username -->
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username" value="" required>
+
+            <!-- Label for email or phone -->
+            <label for="email_or_phone">Email or Phone Number</label>
+            <input type="text" id="email_or_phone" name="email_or_phone" placeholder="Email or Phone Number" value="" required>
+
+            <!-- Label for password -->
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password" value="" required>
+
+            <!-- Label for confirm password -->
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" value="" required>
+
+            <button type="submit"><span>Sign Up</span></button>
+            
+            <!-- Error message block -->
+            <div class="error-msg" id="error-msg">
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </form>
+
+        <div class="already-account">
+            <p>Already have an account? <a href="/login">Log In</a></p>
+        </div>
+    </div>
+</main>
+
+<script>
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+        var username = document.getElementById("username").value;
+        var usernameRegex = /^[a-zA-Z0-9]+$/;  // Only alphanumeric characters
+        var isNumeric = /^\d+$/;  // Check if the username is all numbers
+        var errorMessage = "";
+
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            errorMessage += "Passwords do not match!\n";
+        }
+
+        // Check if username is alphanumeric
+        if (!usernameRegex.test(username)) {
+            errorMessage += "Username must contain only letters and numbers!\n";
+        }
+
+        // Check if username is not only numbers
+        if (isNumeric.test(username)) {
+            errorMessage += "Username cannot be numbers only!\n";
+        }
+
+        // If there's any error, display it
+        if (errorMessage) {
+            document.getElementById("error-msg").innerText = errorMessage;
+            document.getElementById("error-msg").style.display = "block";
+            return false;
+        }
+
+        return true; // Submit form if validation passes
+    }
+</script>
+
+{% endblock body %}

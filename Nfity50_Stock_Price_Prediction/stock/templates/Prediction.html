@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}Prediction Page{% endblock title %}
+
+{% block body %}
+
+<style>
+    /* Main content area styling */
+    body {
+        height: 100vh;
+        background-image: url("static/stock2.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .body-content {
+        flex-grow: 1; /* Ensures content takes the available space between navbar and footer */
+        display: flex;
+        justify-content: center; /* Align content to the center */
+        align-items: center;
+        padding: 20px;
+    }
+
+    /* Content container styling with scrollable content */
+    .content-container {
+        background-color: rgba(0, 0, 0, 0.5); /* Slightly darker background for contrast */
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 600px; /* Decreased width for a more compact layout */
+        max-height: 70vh; /* Reduce height to fit within the viewport */
+        overflow-y: auto; /* Enable vertical scrolling if content overflows */
+        width: 100%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.5);
+        text-align: left;
+        color: white;
+        transition: box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column; /* Aligns child elements vertically */
+        align-items: center; /* Center-aligns all contents within the container */
+    }
+
+    .question p {
+        margin: 0;
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #ffcc00; /* Golden text for question labels */
+    }
+
+    /* Styling for the select dropdown */
+    select {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent dropdown background */
+        border: 2px solid rgba(255, 255, 255, 0.4); /* Light border for better visibility */
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Styling the options to make them visible */
+    option {
+        background-color: rgba(0, 0, 0, 0.7); /* Dark background for options */
+        color: white;
+    }
+
+    /* Enhanced transparent button with shadow */
+    button {
+        color: #ffcc00; /* Golden text color */
+        font-weight: bold; 
+        font-size: 18px;
+        padding: 12px 40px;
+        background-color: rgba(255, 255, 255, 0.1); /* Transparent button */
+        border: 2px solid transparent;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: color 0.4s, background-color 0.4s, box-shadow 0.4s;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(255, 204, 0, 0.5); /* Shadow effect on hover */
+    }
+
+    button:hover {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0px 0px 20px rgba(255, 204, 0, 0.6);
+        border: 2px solid #ffcc00;
+    }
+
+    .button-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .output-message {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #ffcc00;
+        border-radius: 10px;
+        font-size: 18px;
+        text-align: center;
+    }
+</style>
+<main class="body-content">
+    <div class="content-container">
+        <h2 class="p1">Stock Price Prediction</h2>
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="question">
+                <p>1) Enter Opening Value:</p>
+                <input type="number" name="Open" min="0" step="any" required>
+            </div>
+
+            <div class="question">
+                <p>2) Enter Highest Value:</p>
+                <input type="number" name="High" min="0" step="any" required>
+            </div>
+
+            <div class="question">
+                <p>3) Enter Lowest Value:</p>
+                <input type="number" name="Low" min="0" step="any" required>
+            </div>
+
+            <div class="question">
+                <p>4) Enter Volume:</p>
+                <input type="number" name="Vol." min="0" step="any" required>
+            </div>
+
+            <div class="button-container">
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+
+        {% if output %}
+            <div class="output-message">
+                Prediction Result: {{ output }}
+            </div>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock body %}
