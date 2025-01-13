@@ -29,15 +29,6 @@ This project involves building a machine learning-based web application that pre
 
 ---
 
-## How It Works
-
-1. Users input relevant stock details or select a stock from the Nifty50 list.
-2. The application processes the data and passes it to the trained machine learning model.
-3. The model predicts the stock price and displays it to the user along with additional insights.
-4. Users can view historical trends and graphs for better decision-making.
-
----
-
 ## Technology Stack
 
 ### Frontend
@@ -112,6 +103,5 @@ This project involves building a machine learning-based web application that pre
 
 ---
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+
 
